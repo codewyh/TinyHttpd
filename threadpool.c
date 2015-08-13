@@ -226,9 +226,11 @@ static void *threadpool_worker(void *args) {
 
 		pthread_mutex_unlock(&pool->lock);
 
+		LOG_INFO("begin handle request");
 		(*(worker->func))(worker->args);
+		LOG_INFO("end handle request");
 		free(worker);
-		worker == NULL;
+		worker = NULL;
 	}
 	pool->started--;
 	pthread_mutex_unlock(&pool->lock);
